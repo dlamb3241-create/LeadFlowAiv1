@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadFlow AI - 100 Free TN FSBO Leads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white">
+    <div id="root"></div>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState } = React;
+        
+        function LeadFlowLandingPage() {
+            const [email, setEmail] = useState('');
+            const [name, setName] = useState('');
+            const [submitted, setSubmitted] = useState(false);
 
+            const handleSubmit = () => {
+                if (email.includes('@') && name.trim()) {
+                    console.log('Lead captured:', { name, email });
+                    // You can send this to your email using a service like FormSubmit
+                    fetch('https://formsubmit.co/ajax/momentumleadsllc@outlook.com', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, subject: 'New Lead: ' + name })
+                    }).catch(err => console.log(err));
+                    setSubmitted(true);
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-white">
+                    {/* Header */}
+                    <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
+                        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center">
+                                    <span className="text-white text-xl">⚡</span>
+                                </div>
+                                <div>
+                                    <h1 className="text-xl font-bold text-gray-900">LeadFlow AI</h1>
+                                    <p className="text-xs text-teal-600">by Momentum Leads LLC</p>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Hero Section */}
+                    <div className="bg-gradient-to-b from-teal-50 to-white py-16 md:py-24">
+                        <div className="max-w-4xl mx-auto px-4">
+                            {!submitted ? (
+                                <>
+                                    <div className="text-center mb-12">
+                                        <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                                            ⭐ FREE for Tennessee Real Estate Agents
+                                        </div>
+                                        <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                                            Get 100 Hot<br />
+                                            <span className="text-teal-600">FSBO Leads</span><br />
+                                            in Tennessee
+                                        </h2>
+                                        <p className="text-xl md:text-2xl text-gray-600 mb-4">
+                                            Ready-to-contact property owners looking to sell
+                                        </p>
+                                        <p className="text-lg text-gray-500 mb-8">
+                                            Complete with names, phone numbers, addresses, and property details
+                                        </p>
+
+                                        <div className="flex flex-wrap items-center justify-center gap-6 mb-12 text-sm text-gray-600">
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-teal-500">✓</span>
+                                                <span>No credit card required</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-teal-500">✓</span>
+                                                <span>Instant download</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-teal-500">✓</span>
+                                                <span>Updated weekly</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Email Capture */}
+                                    <div className="max-w-lg mx-auto">
+                                        <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-teal-100">
+                                            <div className="text-center mb-6">
+                                                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                    <span className="text-3xl">📥</span>
+                                                </div>
+                                                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                                                    Download Your Free Leads
+                                                </h3>
+                                                <p className="text-gray-600">
+                                                    Enter your info below and we'll send the list instantly
+                                                </p>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                <div>
+                                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                        Your Name
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        value={name}
+                                                        onChange={(e) => setName(e.target.value)}
+                                                        placeholder="John Smith"
+                                                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none focus:border-teal-500 transition"
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                                        Your Email
+                                                    </label>
+                                                    <input
+                                                        type="email"
+                                                        value={email}
+                                                        onChange={(e) => setEmail(e.target.value)}
+                                                        onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+                                                        placeholder="john@example.com"
+                                                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none focus:border-teal-500 transition"
+                                                    />
+                                                </div>
+
+                                                <button
+                                                    onClick={handleSubmit}
+                                                    className="w-full px-6 py-4 bg-teal-500 text-white rounded-lg font-bold text-lg hover:bg-teal-600 transition flex items-center justify-center gap-2 shadow-lg"
+                                                >
+                                                    Get My Free Leads Now
+                                                    <span>→</span>
+                                                </button>
+                                            </div>
+
+                                            <p className="text-xs text-gray-500 text-center mt-4">
+                                                We respect your privacy. Unsubscribe anytime.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="max-w-2xl mx-auto text-center">
+                                    <div className="bg-white rounded-2xl shadow-2xl p-12 border-2 border-teal-100">
+                                        <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <span className="text-4xl">✅</span>
+                                        </div>
+                                        <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                                            Check Your Email! 📧
+                                        </h3>
+                                        <p className="text-lg text-gray-600 mb-6">
+                                            We just sent your <strong>100 Free FSBO Leads</strong> to:
+                                        </p>
+                                        <p className="text-xl font-bold text-teal-600 mb-8">{email}</p>
+                                        <div className="bg-teal-50 rounded-lg p-6 mb-8">
+                                            <p className="text-gray-700 mb-4">
+                                                <strong>While you wait, here's what you got:</strong>
+                                            </p>
+                                            <ul className="text-left space-y-2 text-gray-700">
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-teal-500">✓</span>
+                                                    <span>100 verified FSBO properties across Tennessee</span>
+                                                </li>
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-teal-500">✓</span>
+                                                    <span>Owner names and contact information</span>
+                                                </li>
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-teal-500">✓</span>
+                                                    <span>Property addresses and estimated values</span>
+                                                </li>
+                                                <li className="flex items-start gap-2">
+                                                    <span className="text-teal-500">✓</span>
+                                                    <span>Bonus: Email templates to contact them</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div className="border-t border-gray-200 pt-6">
+                                            <p className="text-gray-600 mb-4">
+                                                <strong>Want 500+ fresh leads delivered every month?</strong>
+                                            </p>
+                                            <a href="mailto:info@momentumleads.com?subject=Interested in Monthly Leads" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 transition">📧 Learn About Our Pro Plan</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* What's Included Section */}
+                    {!submitted && (
+                        <div className="bg-white py-16">
+                            <div className="max-w-6xl mx-auto px-4">
+                                <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+                                    What's Inside Your Free Lead List
+                                </h3>
+                                <div className="grid md:grid-cols-3 gap-8">
+                                    <div className="bg-teal-50 rounded-xl p-6">
+                                        <div className="text-4xl mb-4">🏠</div>
+                                        <h4 className="font-bold text-gray-900 mb-2 text-lg">FSBO Properties</h4>
+                                        <p className="text-gray-700">
+                                            100 verified for-sale-by-owner listings across Tennessee. These sellers are motivated and ready to talk.
+                                        </p>
+                                    </div>
+
+                                    <div className="bg-teal-50 rounded-xl p-6">
+                                        <div className="text-4xl mb-4">📞</div>
+                                        <h4 className="font-bold text-gray-900 mb-2 text-lg">Full Contact Info</h4>
+                                        <p className="text-gray-700">
+                                            Names, phone numbers, and property addresses. Everything you need to reach out and start conversations.
+                                        </p>
+                                    </div>
+
+                                    <div className="bg-teal-50 rounded-xl p-6">
+                                        <div className="text-4xl mb-4">📍</div>
+                                        <h4 className="font-bold text-gray-900 mb-2 text-lg">Property Details</h4>
+                                        <p className="text-gray-700">
+                                            Estimated values, property types, and locations. Know what you're working with before you make contact.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Testimonial */}
+                    {!submitted && (
+                        <div className="bg-teal-50 py-16">
+                            <div className="max-w-4xl mx-auto px-4">
+                                <div className="bg-white rounded-xl shadow-lg p-8 md:p-12">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 text-2xl font-bold text-teal-600">
+                                            SM
+                                        </div>
+                                        <div>
+                                            <div className="flex gap-1 mb-2">
+                                                <span className="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                                            </div>
+                                            <p className="text-gray-700 text-lg mb-4 italic">
+                                                "I closed 2 deals in my first month using these FSBO leads. The contact info was accurate and the sellers were actually motivated. Worth way more than free!"
+                                            </p>
+                                            <p className="font-bold text-gray-900">Sarah Martinez</p>
+                                            <p className="text-gray-600 text-sm">Real Estate Agent, Knoxville</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Footer */}
+                    <footer className="border-t border-gray-200 bg-white py-8">
+                        <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
+                            <p className="mb-2">© 2025 Momentum Leads LLC. Serving Tennessee Real Estate Professionals.</p>
+                            <p className="text-sm">Knoxville, TN | info@momentumleads.com</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<LeadFlowLandingPage />, document.getElementById('root'));
+    </script>
+</body>
+</html>
